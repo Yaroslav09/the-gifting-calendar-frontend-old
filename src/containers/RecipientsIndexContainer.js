@@ -5,8 +5,6 @@ import { fetchRecipients } from '../redux/actions/fetchRecipients';
 class RecipientsIndexContainer extends Component {
   componentDidMount() {
     this.props.fetchRecipients();
-    // fetchRecipients is not executing at this point in the codebase
-    debugger
   }
 
   render() {

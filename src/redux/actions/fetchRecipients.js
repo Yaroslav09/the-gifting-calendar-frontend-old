@@ -3,7 +3,7 @@ export function fetchRecipients() {
     dispatch(fetchRecipientsBegin());
     return fetch(`http://localhost:3001/api/recipients`)
       .then(response => response.json())
-      .then(data => {
+      .then(({data}) => {
         dispatch(fetchRecipientsSuccess(data));
         return data;
       })
