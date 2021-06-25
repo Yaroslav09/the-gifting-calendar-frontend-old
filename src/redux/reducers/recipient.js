@@ -1,8 +1,9 @@
+import { combineReducers } from 'redux';
 import {
   FETCH_RECIPIENTS_BEGIN,
   FETCH_RECIPIENTS_SUCCESS,
   FETCH_RECIPIENTS_FAILURE
-} from '../actions/fetchRecipients';
+} from '../actions/actionTypes';
 
 const initialState = {
   recipients: [],
@@ -59,4 +60,8 @@ const recipientsReducer = function reducer(
   }
 }
 
-export default recipientsReducer;
+const recipient = combineReducers({
+
+});
+
+export default recipient;
