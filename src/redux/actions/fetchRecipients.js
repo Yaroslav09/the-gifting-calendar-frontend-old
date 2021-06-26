@@ -1,7 +1,6 @@
 import {
   FETCH_RECIPIENTS_BEGIN,
-  FETCH_RECIPIENTS_SUCCESS,
-  FETCH_RECIPIENTS_FAILURE
+  FETCH_RECIPIENTS_SUCCESS
 } from '../actions/actionTypes';
 
 export function fetchRecipients() {
@@ -13,7 +12,6 @@ export function fetchRecipients() {
         dispatch(fetchRecipientsSuccess(data));
         return data;
       })
-      .catch(error => dispatch(fetchRecipientsFailure(error)));
   }
 };
 
@@ -23,10 +21,5 @@ export const fetchRecipientsBegin = () => ({
 
 export const fetchRecipientsSuccess = data => ({
   type: FETCH_RECIPIENTS_SUCCESS,
-  payload: { data }
-});
-
-export const fetchRecipientsFailure = error => ({
-  type: FETCH_RECIPIENTS_FAILURE,
-  payload: { error }
+  payload: data
 });

@@ -1,8 +1,7 @@
 import { combineReducers } from 'redux';
 import {
   FETCH_RECIPIENTS_BEGIN,
-  FETCH_RECIPIENTS_SUCCESS,
-  FETCH_RECIPIENTS_FAILURE
+  FETCH_RECIPIENTS_SUCCESS
 } from '../actions/actionTypes';
 
 const initialState = {
@@ -38,30 +37,44 @@ const recipientsReducer = function reducer(
     case 'ADD_RECIPIENT':
       return {
         ...state,
-        recipients: [...state.recipients, action.payload]
-      }
-    case 'REMOVE_RECIPIENT':
+        isLoading: true
+      };
+    case FETCH_RECIPIENTS_SUCCESS:
       return {
         ...state,
-        recipients: state.recipients.filter(
-          recipient => parseInt(recipient.id, 10) !== parseInt(action.payload, 10)
-        )
-      }
-    // case 'UPDATE_RECIPIENT':
-    //   const foundRecipient = state.recipients.find(recipient => parseInt(recipient.id, 10) === parseInt(action.recipient.id, 10));
-    //   const foundRecipientIndex = state.recipients.findIndex(foundRecipient);
-      // Remove the found recipient from the state
-      // Add the updated recipient (a.k.a. the action.recipient object) at foundRecipientIndex
-      // Return recipients
-      // ! TODO: UNFINISHED
-      // return state;
+        isLoading: false
+      };
     default:
       return state;
   }
 }
 
 const recipient = combineReducers({
-
+  recipientsById,
+  recipientIds,
+  isLoading
 });
 
 export default recipient;
+
+// ! MORE RECIPIENT ACTIONS TO BUILD OUT !
+// case 'ADD_RECIPIENT':
+//   return {
+//     ...state,
+//     recipients: [...state.recipients, action.payload]
+//   }
+// case 'REMOVE_RECIPIENT':
+//   return {
+//     ...state,
+//     recipients: state.recipients.filter(
+//       recipient => parseInt(recipient.id, 10) !== parseInt(action.payload, 10)
+//     )
+//   }
+// case 'UPDATE_RECIPIENT':
+//   const foundRecipient = state.recipients.find(recipient => parseInt(recipient.id, 10) === parseInt(action.recipient.id, 10));
+//   const foundRecipientIndex = state.recipients.findIndex(foundRecipient);
+  // Remove the found recipient from the state
+  // Add the updated recipient (a.k.a. the action.recipient object) at foundRecipientIndex
+  // Return recipients
+  // ! TODO: UNFINISHED
+  // return state;
