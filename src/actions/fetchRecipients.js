@@ -1,25 +1,26 @@
 import {
   FETCH_RECIPIENTS_BEGIN,
   FETCH_RECIPIENTS_SUCCESS
-} from '../actions/actionTypes';
+} from '../constants/ActionTypes';
 
 export function fetchRecipients() {
   return dispatch => {
     dispatch(fetchRecipientsBegin());
     return fetch(`http://localhost:3001/api/recipients`)
       .then(response => response.json())
-      .then(({data}) => {
-        dispatch(fetchRecipientsSuccess(data));
-        return data;
+      .then(json => {
+        debugger
+        dispatch(fetchRecipientsSuccess(json));
+        return json;
       })
   }
 };
 
 export const fetchRecipientsBegin = () => ({
-  type: FETCH_RECIPIENTS_BEGIN
+  type: 'recipients/fetchRecipientsBegin'
 });
 
-export const fetchRecipientsSuccess = data => ({
-  type: FETCH_RECIPIENTS_SUCCESS,
-  payload: data
+export const fetchRecipientsSuccess = json => ({
+  type: 'recipients/fetchRecipientsSuccess',
+  payload: json.data
 });
