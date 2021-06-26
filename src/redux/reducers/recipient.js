@@ -4,37 +4,53 @@ import {
   FETCH_RECIPIENTS_SUCCESS
 } from '../actions/actionTypes';
 
-const initialState = {
-  recipients: [],
-  loading: false,
-  error: null
-};
-
-const recipientsReducer = function reducer(
-  state = initialState,
+const recipientsById = function reducer(
+  state = { recipientsById: {} },
   action
 ) {
   switch (action.type) {
     case FETCH_RECIPIENTS_BEGIN:
       return {
         ...state,
-        loading: true,
-        error: null
+        recipientsById: {}
       };
     case FETCH_RECIPIENTS_SUCCESS:
       return {
         ...state,
-        loading: false,
-        recipients: action.payload.data
+        recipientsById: {}
       };
-    case FETCH_RECIPIENTS_FAILURE:
+    default:
+      return state;
+  }
+}
+
+const recipientIds = function reducer(
+  state = { recipientIds: [] },
+  action
+) {
+  switch (action.type) {
+    case FETCH_RECIPIENTS_BEGIN:
       return {
         ...state,
-        loading: false,
-        error: action.payload.error,
-        recipients: []
-      }
-    case 'ADD_RECIPIENT':
+        recipientIds: []
+      };
+      case FETCH_RECIPIENTS_SUCCESS:
+      console.log("triggered success", action.payload.data)
+      return {
+        ...state,
+        recipientIds: action.payload.map(obj => parseInt(obj.id, 10))
+      };
+    default:
+      return state;
+  }
+}
+
+const isLoading = function reducer(
+  state = { isLoading: false },
+  action
+) {
+  switch (action.type) {
+    case FETCH_RECIPIENTS_BEGIN:
       return {
         ...state,
         isLoading: true
