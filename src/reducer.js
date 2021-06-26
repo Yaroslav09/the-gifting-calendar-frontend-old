@@ -1,11 +1,8 @@
 import { combineReducers } from 'redux';
-import { recipients, recipientsById, recipientIds, isLoading } from './features/recipients/recipientsSlice';
+import recipients from './features/recipients/recipientsSlice';
 
 const recipient = combineReducers({
-  recipients,
-  recipientsById,
-  recipientIds,
-  isLoading
+  recipients
 });
 
 const rootReducer = combineReducers({

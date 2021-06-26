@@ -5,83 +5,96 @@ import {
 import initialState from '../state';
 
 
-export const recipients = function reducer(
+const recipients = function reducer(
   state = initialState,
   action
 ) {
   switch (action.type) {
-    case FETCH_RECIPIENTS_BEGIN:
-      return {
+    case 'recipients/fetchRecipientsBegin':
+      return [
         ...state,
-        recipients: []
-      };
-    case FETCH_RECIPIENTS_SUCCESS:
-      return {
+        {
+          recipients: [],
+          recipientsById: {},
+          recipientIds: [],
+          isLoading: true
+        }
+      ];
+    case 'recipients/fetchRecipientsSuccess':
+      debugger
+      return [
         ...state,
-        recipients: []
-      };
+        {
+          recipients: action.payload.recipients,
+          recipientsById: action.payload.recipientsById,
+          recipientIds: action.payload.recipientIds,
+          isLoading: false
+        }
+      ];
     default:
       return state;
   }
 }
 
-export const recipientsById = function reducer(
-  state = initialState,
-  action
-) {
-  switch (action.type) {
-    case FETCH_RECIPIENTS_BEGIN:
-      return {
-        ...state,
-        recipientsById: {}
-      };
-    case FETCH_RECIPIENTS_SUCCESS:
-      return {
-        ...state,
-        recipientsById: {}
-      };
-    default:
-      return state;
-  }
-}
+export default recipients
 
-export const recipientIds = function reducer(
-  state = initialState,
-  action
-) {
-  switch (action.type) {
-    case FETCH_RECIPIENTS_BEGIN:
-      return {
-        ...state,
-        recipientIds: []
-      };
-      case FETCH_RECIPIENTS_SUCCESS:
-      console.log("triggered success", action.payload.data)
-      return {
-        ...state,
-        recipientIds: action.payload.map(obj => parseInt(obj.id, 10))
-      };
-    default:
-      return state;
-  }
-}
+// export const recipientsById = function reducer(
+//   state = initialState,
+//   action
+// ) {
+//   switch (action.type) {
+//     case 'recipients/fetchRecipientsBegin':
+//       return {
+//         ...state,
+//         recipientsById: {}
+//       };
+//     case 'recipients/fetchRecipientsSuccess':
+//       return {
+//         ...state,
+//         recipientsById: {}
+//       };
+//     default:
+//       return state;
+//   }
+// }
 
-export const isLoading = function reducer(
-  state = initialState,
-  action
-) {
-  switch (action.type) {
-    case FETCH_RECIPIENTS_BEGIN:
-      return {
-        ...state,
-        isLoading: true
-      };
-    case FETCH_RECIPIENTS_SUCCESS:
-      return {
-        ...state,
-        isLoading: false
-      };
-    default:
-      return state;
-  }
-}
+// export const recipientIds = function reducer(
+//   state = initialState,
+//   action
+// ) {
+//   switch (action.type) {
+//     case 'recipients/fetchRecipientsBegin':
+//       return {
+//         ...state,
+//         recipientIds: []
+//       };
+//       case 'recipients/fetchRecipientsSuccess':
+//       return {
+//         ...state,
+//         // recipientIds: action.payload.map(obj => parseInt(obj.id, 10))
+//         recipientIds: []
+//       };
+//     default:
+//       return state;
+//   }
+// }
+
+// export const isLoading = function reducer(
+//   state = initialState,
+//   action
+// ) {
+//   switch (action.type) {
+//     case 'recipients/fetchRecipientsBegin':
+//       return {
+//         ...state,
+//         isLoading: true
+//       };
+//     case 'recipients/fetchRecipientsSuccess':
+//       return {
+//         ...state,
+//         isLoading: false
+//       };
+//     default:
+//       return state;
+//   }
+// }
